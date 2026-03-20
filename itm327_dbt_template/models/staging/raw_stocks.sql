@@ -1,3 +1,3 @@
 -- TODO: Update the source table name to match your prefix (e.g., SMITHJ_STOCKS)
 select *
-from {{ source('snowbearair', 'PINNEYZ_STOCKS') }}
+from {{ source('snowbearair', 'MONGO_TABLE_ZP') }}
