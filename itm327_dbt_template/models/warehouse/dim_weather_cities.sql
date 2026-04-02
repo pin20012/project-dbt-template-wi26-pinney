@@ -8,23 +8,16 @@
 --       a specific stock exchange (e.g., New York → NYSE/NASDAQ, London → LSE).
 
 SELECT
-    CITY,
-
-    -- Date range this city appears in your weather data
-    MIN(DATE)   AS FIRST_OBSERVATION_DATE,
-    MAX(DATE)   AS LAST_OBSERVATION_DATE,
-    COUNT(*)    AS TOTAL_OBSERVATION_DAYS,
-
-    -- Typical conditions (descriptive stats across the full history)
-    ROUND(AVG(MAX_TEMP), 2)   AS AVG_MAX_TEMP,
-    ROUND(AVG(MIN_TEMP), 2)   AS AVG_MIN_TEMP,
-    ROUND(AVG(PRECIP), 2)     AS AVG_DAILY_PRECIP,
-    ROUND(AVG(MAX_WIND), 2)   AS AVG_MAX_WIND,
-
-    -- Extreme conditions
-    MAX(MAX_TEMP)             AS HOTTEST_DAY_TEMP,
-    MIN(MIN_TEMP)             AS COLDEST_DAY_TEMP,
-    MAX(PRECIP)               AS WETTEST_DAY_PRECIP
-
+    "city"                          AS CITY,
+    MIN("date"::DATE)               AS FIRST_OBSERVATION_DATE,
+    MAX("date"::DATE)               AS LAST_OBSERVATION_DATE,
+    COUNT(*)                        AS TOTAL_OBSERVATION_DAYS,
+    ROUND(AVG("max_temp"), 2)       AS AVG_MAX_TEMP,
+    ROUND(AVG("min_temp"), 2)       AS AVG_MIN_TEMP,
+    ROUND(AVG("precip"), 2)         AS AVG_DAILY_PRECIP,
+    ROUND(AVG("max_wind"), 2)       AS AVG_MAX_WIND,
+    MAX("max_temp")                 AS HOTTEST_DAY_TEMP,
+    MIN("min_temp")                 AS COLDEST_DAY_TEMP,
+    MAX("precip")                   AS WETTEST_DAY_PRECIP
 FROM {{ ref('raw_weather') }}
-GROUP BY CITY
+GROUP BY "city"
