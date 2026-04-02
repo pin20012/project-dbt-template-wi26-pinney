@@ -10,19 +10,12 @@
 
 SELECT
     SYMBOL,
-
-    -- Date range this symbol appears in your dataset
-    MIN(TRADE_DATE)  AS FIRST_SEEN_DATE,
-    MAX(TRADE_DATE)  AS LAST_SEEN_DATE,
-    COUNT(*)         AS TOTAL_TRADING_DAYS,
-
-    -- Price range across the full history
-    MAX(HIGH)        AS ALL_TIME_HIGH,
-    MIN(LOW)         AS ALL_TIME_LOW,
-    AVG(CLOSE)       AS AVG_CLOSE_PRICE,
-
-    -- Activity level (useful for filtering small/inactive tickers)
-    AVG(VOLUME)      AS AVG_DAILY_VOLUME
-
+    MIN(TRADE_DATE)            AS FIRST_SEEN_DATE,
+    MAX(TRADE_DATE)            AS LAST_SEEN_DATE,
+    COUNT(*)                   AS TOTAL_TRADING_DAYS,
+    MAX(HIGH)                  AS ALL_TIME_HIGH,
+    MIN(LOW)                   AS ALL_TIME_LOW,
+    AVG(CLOSE)                 AS AVG_CLOSE_PRICE,
+    AVG(VOLUME)                AS AVG_DAILY_VOLUME
 FROM {{ ref('raw_stocks') }}
 GROUP BY SYMBOL
