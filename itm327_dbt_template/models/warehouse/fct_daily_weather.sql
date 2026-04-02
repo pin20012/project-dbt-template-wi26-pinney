@@ -10,11 +10,10 @@
 --       UV index), add them here so marts inherit them automatically.
 
 SELECT
-    DATE,
-    CITY,
-    MAX_TEMP,
-    MIN_TEMP,
-    PRECIP,
-    MAX_WIND
-
+    "date"::DATE    AS DATE,
+    "city"          AS CITY,
+    "max_temp"      AS MAX_TEMP,
+    "min_temp"      AS MIN_TEMP,
+    "precip"        AS PRECIP,
+    "max_wind"      AS MAX_WIND
 FROM {{ ref('raw_weather') }}
